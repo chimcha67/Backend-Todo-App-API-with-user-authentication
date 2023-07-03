@@ -5,11 +5,13 @@ const { validateToken } = require('../Controllers/validateUserToken')
 const Router = express.Router()
 
 
-// Router.use(validateToken)
+Router.use(validateToken)
 
 
-Router.get('/',validateToken, todoCntroller.getAll)
-Router.post('/create',validateToken, todoCntroller.createTodo)
+Router.get('/', todoCntroller.getAll)
+Router.post('/create', todoCntroller.createTodo)
+Router.get('/:id', todoCntroller.getSingleTodo)
+
 Router.put('/:id', todoCntroller.updateTodoContent)
 Router.delete('/:id', todoCntroller.deleteTodo)
 

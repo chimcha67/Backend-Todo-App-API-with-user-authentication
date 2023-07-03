@@ -1,9 +1,9 @@
 const express = require('express')
-const userCntroller = require('../Controllers/user-controller')
+const userCntroller = require('../User-controller/user-controller')
 const {validateToken} = require('../Controllers/validateUserToken')
 const Router = express.Router()
 const cors = require('cors')
-
+const  userService  = require('../Controllers/user.services')
 
 var corsOptions = {
     origin: 'http://example.com',
@@ -11,15 +11,15 @@ var corsOptions = {
   }
 
 
-Router.post('/create', userCntroller.createUser)
+Router.post('/create', userService.registration)
 Router.get('/current',validateToken, userCntroller.currentUser)
 Router.get('/', userCntroller.getAllUsers)
-Router.get('/:id', userCntroller.getSingleUser)
-Router.put('/:id', userCntroller.updateUser)
+Router.get('/:id',validateToken, userCntroller.getSingleUser)
+Router.put('/:id',validateToken, userService.update)
 Router.delete('/:id', userCntroller.deleteUser)
 
 
-Router.post('/login', userCntroller.loginUser )
+Router.post('/login', userService.login )
 
 
 // Router.get('/all', userCntroller.getUsers)

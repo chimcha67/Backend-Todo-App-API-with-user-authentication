@@ -29,6 +29,10 @@ const UserModel = new mongoose.Schema({
     password:{
         type: String,
         required: [true, 'password is required']
+    },
+    repeat_password:{
+        type: String,
+        required: [true, 'password is required']
     }
 })
 

@@ -4,15 +4,16 @@ const asyncHandler = require('express-async-handler')
 
 
 const validateToken = async(req, res, next)=> {
-    console.log("check")
+    //console.log("check")
     let token;
     let authHeader = req.headers.Authorization ||  req.headers.authorization
     console.log(authHeader)
     if(authHeader && authHeader.startsWith('Bearer')){
         token = authHeader.split(" ")[1]
+          
         jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded)=>{
             if(err){
-                res.status(401).json({message: 'unauthorized user'})
+                return res.status(401).json({message: 'unauthorized user'})
             }
            req.user = decoded.user
            console.log(req.user)
@@ -22,11 +23,11 @@ const validateToken = async(req, res, next)=> {
         //   }
           
         })
-        // if(!token){
-        //     res.status(401).json({message: 'token is missing'})
-        // }
+       
     }
-
+    if(!token){
+        return res.status(401).json({message: 'token is missing'})
+    }
 }
 
 module.exports = {validateToken}

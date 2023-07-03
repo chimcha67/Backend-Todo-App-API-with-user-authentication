@@ -11,7 +11,7 @@ const controller = express()
 
 const createUser = async(req, res, next)=>{
     try {
-        const {name, age, email, gender, password, confirmPassword}= req.body
+        const {name, age, email, gender, password, repeat_password}= req.body
         console.log(name, age, email, gender)
 
         //const {valid, reason, validators} = await emailValidator.validate(email);
@@ -23,7 +23,17 @@ const createUser = async(req, res, next)=>{
         //     reason: validators[reason].reason
         // })
 
+
+        if(!name || !age || !email || !gender || !password || !repeat_password){
+            res.status(400).json({
+                message: 'all fields are required'
+            }
+            )
+            
+        }
+
         // check if user exist
+
 
         const existingUser = await User.findOne({email})
         if(existingUser){
@@ -42,6 +52,10 @@ const createUser = async(req, res, next)=>{
 
         // hash password
         const hashedPassword = await bcrypt.hash(password, 10)
+         const repeatPassword = await bcrypt.hash(password, 10)
+         if(repeat_password !== password){
+            return res.status(400).json({message: 'password must be thesame'})
+         }
 
 
 
@@ -53,7 +67,10 @@ const createUser = async(req, res, next)=>{
                 age: age,
                 email: email,
                 gender: gender,
-                password: hashedPassword})
+                password: hashedPassword,
+                repeat_password: repeatPassword
+               
+            })
         // const user = await new User ({
         //     name: name,
         //     age: age,
@@ -112,7 +129,7 @@ const getAllUsers = async(req, res, next)=>{
 const getSingleUser = async(req, res, next)=>{
    try {
     const id = req.params.id
-    if(id.length>24 || id.length<24) return res.status(400)
+    if(id.length>24 || id.length<24) return res.status(400).json({message:'invalid id'})
     const user = await User.findById(id)
 
     if(!user){
@@ -135,7 +152,7 @@ const getSingleUser = async(req, res, next)=>{
 
 const updateUser = async(req, res, next)=>{
     const id = req.params.id
-    if(id.length>24 || id.length<24) return res.status(400)
+    if(id.length>24 || id.length<24) return res.status(400).json({message:'invalid id'})
 
     const user = await User.findById(id)
     if(!user){
