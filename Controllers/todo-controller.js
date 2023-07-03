@@ -134,14 +134,15 @@ const deleteTodo = async(req, res, next)=>{
     const id = req.params.id
     if(id.length>24 || id.length<24) return res.status(400)
     const todo = await Todo.findById(req.params.id)
-    if(Todo.user_id.toString() !== req.user.id){
-        return res.status(403).json({
-            message: 'user cannot edit another users todo'
-        })
-    }
-    if(!todoDelete){ 
+   
+    if(!todo){ 
         return res.status(404).json({
             message: 'todo not found',
+        })
+    }
+    if(JSON.stringify(todo.user_id) !== JSON.stringify(req.user.id)){
+        return res.status(403).json({
+            message: 'user cannot edit another users todo'
         })
     }
 

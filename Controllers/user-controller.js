@@ -54,8 +54,8 @@ const createUser = async(req, res, next)=>{
         const hashedPassword = await bcrypt.hash(password, 10)
          const repeatPassword = await bcrypt.hash(password, 10)
          if(repeat_password !== password){
-            return res.status(400).json({message: 'password must be thesame'})
-         }
+            //return res.status(400).json({message: 'password must be thesame'})
+         }else{
 
 
 
@@ -88,7 +88,7 @@ const createUser = async(req, res, next)=>{
             message: 'user created successfully',
             user: user
         })
-
+    }
        
         //const result = await User.create(user)
     } catch (error) {

@@ -12,7 +12,7 @@ const registration = async(req, res, next)=>{
         })
     }
 
-   await userService.createUser(req,res, next)
+  return await userService.createUser(req,res, next)
 }
 
 
