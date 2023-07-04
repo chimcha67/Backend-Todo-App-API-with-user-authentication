@@ -11,8 +11,8 @@ const controller = express()
 
 const createUser = async(req, res, next)=>{
     try {
-        const {name, age, email, gender, password, repeat_password}= req.body
-        console.log(name, age, email, gender)
+        const {name, email,  password, repeat_password}= req.body
+        console.log(name, email, )
 
         //const {valid, reason, validators} = await emailValidator.validate(email);
 
@@ -24,7 +24,7 @@ const createUser = async(req, res, next)=>{
         // })
 
 
-        if(!name || !age || !email || !gender || !password || !repeat_password){
+        if(!name ||  !email || !password || !repeat_password){
             res.status(400).json({
                 message: 'all fields are required'
             }
@@ -54,8 +54,8 @@ const createUser = async(req, res, next)=>{
         const hashedPassword = await bcrypt.hash(password, 10)
          const repeatPassword = await bcrypt.hash(password, 10)
          if(repeat_password !== password){
-            //return res.status(400).json({message: 'password must be thesame'})
-         }else{
+            return res.status(400).json({message: 'password must be thesame'})
+         }
 
 
 
@@ -64,9 +64,9 @@ const createUser = async(req, res, next)=>{
 
         const user = await User.create({
                 name: name,
-                age: age,
+                //age: age,
                 email: email,
-                gender: gender,
+                //gender: gender,
                 password: hashedPassword,
                 repeat_password: repeatPassword
                
@@ -88,7 +88,7 @@ const createUser = async(req, res, next)=>{
             message: 'user created successfully',
             user: user
         })
-    }
+
        
         //const result = await User.create(user)
     } catch (error) {
@@ -214,8 +214,8 @@ const loginUser = async(req,res)=>{
                 user:{
                     email: user.email,
                     name: user.name,
-                    age: user.age,
-                    gender: user.gender,
+                    //age: user.age,
+                    //gender: user.gender,
                      id : user.id
                 }
             }, 

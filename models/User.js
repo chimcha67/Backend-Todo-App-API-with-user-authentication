@@ -5,10 +5,10 @@ const UserModel = new mongoose.Schema({
         type: String,
         required: [true, 'name is required']
     },
-    age:{
-        type: Number,
-        required: [true, 'age is required']
-    },
+    // age:{
+    //     type: Number,
+    //     //required: [true, 'age is required']
+    // },
     email:{
         type: String,
         required: [true, 'email is required'],
@@ -21,11 +21,11 @@ const UserModel = new mongoose.Schema({
     // },
 
     },
-    gender:{
-        type: String,
-        enum:['M','F'],
-        required: [true, 'gender is required']
-    },
+    // gender:{
+    //     type: String,
+    //     enum:['M','F'],
+    //     //required: [, 'gender is required']
+    // },
     password:{
         type: String,
         required: [true, 'password is required']
