@@ -1,7 +1,7 @@
 const express = require('express')
 const userRouter = require('./Routs/users')
 const todoRouter = require('./Routs/todoRoutes')
-
+const cors = require('cors')
 const  connectDb  = require('./Routs/config/db')
 const bodyParser = require('body-parser');
 
@@ -10,6 +10,16 @@ const app = express()
 app.use(
     express.json()
 )
+
+
+app.use (cors({
+    origin: '*',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}))
+
+app.use(cors({
+    methods:['GET', 'POST','DELETE', 'UPDATE', ,'PUT']
+}))
 
 app.use(bodyParser.json());
 connectDb()
