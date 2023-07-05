@@ -13,6 +13,7 @@ app.use(
 
 
 app.use (cors())
+require('./Routs/index.routes')
 //     origin: '*',
 //     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 // }))
