@@ -5,10 +5,7 @@ const Router = express.Router()
 const cors = require('cors')
 const  userService  = require('../Controllers/user.services')
 
-var corsOptions = {
-    origin: 'http://example.com',
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-  }
+
 
 
 Router.post('/create', userService.registration)

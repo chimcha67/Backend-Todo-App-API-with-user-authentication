@@ -12,6 +12,10 @@ app.use(
 )
 
 
+// https://documenter.getpostman.com/view/28308145/2s93zCa1dN
+
+
+
 app.use (cors())
 require('./Routs/index.routes')
 //     origin: '*',

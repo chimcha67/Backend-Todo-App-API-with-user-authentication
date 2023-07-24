@@ -103,7 +103,6 @@ const getSingleTodo = async(req, res, next)=>{
     }
  }
 
-
     // update a todo idemtified by todoid in the request
 
 const updateTodoContent = async(req, res, next)=>{
