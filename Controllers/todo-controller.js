@@ -11,14 +11,14 @@ const createTodo = async(req, res,next)=>{
    try {
      // validate request
     const {content} = req.body
-     const existingTodo = await Todo.findOne({content})
-     if(existingTodo){
-         return res.status(400).json({
-             status: false,
-             message: 'todo already exist'
-     })
-     }
-     else if(!req.body.content){
+    //  const existingTodo = await Todo.findOne({content})
+    //  if(existingTodo){
+    //      return res.status(400).json({
+    //          status: false,
+    //          message: 'todo already exist'
+    //  })
+    //  }
+      if(!req.body.content){
         return res.status(400).json({message: 'input field cannot be empty'})
     }
 
